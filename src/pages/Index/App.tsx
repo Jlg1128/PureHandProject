@@ -32,23 +32,19 @@ class App extends Component<Props, State>{
   }
   componentDidMount() {
     test();
+    console.log('12312')
   }
   render() {
     return (
-      <Router>
-        <Switch >
-        <Route path="/user" component={Child} />
-        <Route path="/home" component={Theme} />
-        <Route path="/" component={Theme} />
-        <Redirect from="*" to="/user" />
-        </Switch>
-      </Router>
+        <Link to='/user'>我是App</Link>
     );
   }
 }
 
-export default connect(
-  ({ counter }: any) => ({ count: counter.count }),
-  // (dispatch) => ({ ...bindActionCreators(sendAction,dispatch) })
+// export default connect(
+//   ({ counter }: any) => ({ count: counter.count }),
+//   // (dispatch) => ({ ...bindActionCreators(sendAction,dispatch) })
 
-)(App)  
+// )(App)  
+
+export default App

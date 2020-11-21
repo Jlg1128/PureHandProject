@@ -1,7 +1,5 @@
 
 export function sendAction() {
-    console.log(1);
-    
     let action = {
         type: 'ADD',
         payload: 2
@@ -9,4 +7,4 @@ export function sendAction() {
     return action
 }
 
-export default {sendAction}
+export default { sendAction }

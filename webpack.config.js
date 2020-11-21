@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
+const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -15,10 +16,12 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: getPublicPath()
     },
+    devtool:'cheap-module-source-map',
     devServer: {
         // contentBase: path.join(__dirname,'public'),
         // host: 'localhost',
-        port: 8000
+        port: 8000,
+        historyApiFallback: true,
     },
     module: {
         rules: [
@@ -83,7 +86,13 @@ module.exports = {
                         }
                     },
                 ]
-            }
+            },
+            // {
+            //     test: /.(tsx?|jsx?|css|less|scss)$/,
+            //     enforce: 'pre',
+            //     use: ['source-map-loader'],
+            //     exclude: '/node_modules/',
+            // }
         ]
     },
     resolve: {
@@ -103,6 +112,11 @@ module.exports = {
             // both options are optional
             filename: '[name].css',
             chunkFilename: '[id].css'
-        })
+        }),
+        // new webpack.SourceMapDevToolPlugin({
+        //     filename: '[name].js',
+        //     test: /.(tsx?|jsx?|css|less|scss)$/,
+        //     exclude: '/node_modules/',
+        // })
     ]
 };

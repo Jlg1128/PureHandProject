@@ -1,27 +1,40 @@
 import { createBrowserHistory } from 'history';
-import React, { Component } from 'react'
-import { ReactNode } from 'react';
-import { Link, BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import { RouterConfigType } from './routerConfig';
-export const history = createBrowserHistory();
+import React, { ReactNode } from 'react';
 
-const routerConfig = require('./routerConfig')
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import routerConfig, { RouterConfigType } from './routerConfig';
 
+const history = createBrowserHistory();
 
-function renderRouteConf(container: ReactNode | null, router: Array<RouterConfigType>, contextPath: string) {
-    let routerChildren: Array<any> = []
-    function renderRoute(routerItem: RouterConfigType, contextPath: string) {
-        const { path, component } = routerItem
-        routerChildren.push(
-            <Route
-            key={path}
-            exact
-            path={path}
-            render={() => {
-                div
-            }}
-          />
-        
-        )
-    }
+function renderRouteConf(container: ReactNode | null, router: Array<RouterConfigType>, publicPath: string) {
+	const routerArr: any = [];
+	function renderRoute(routerItem: RouterConfigType, contextPath: string) {
+		const { path, component, layout = null } = routerItem;
+		return <Route
+			key={path}
+			exact
+			path={path}
+			render={(routeProps: any) => (
+				layout
+					? React.createElement(layout, routeProps, React.createElement(component, routeProps))
+					: React.createElement(component, routeProps)
+			)}
+		/>;
+	}
+	router.forEach((routerItem) => routerArr.push(
+  <Switch key={routerItem.path}>
+    {renderRoute(routerItem, '/')}
+  </Switch>,
+	));
+	return routerArr;
+}
+const routeChildren = renderRouteConf(null, routerConfig, '/');
+export default class Routers extends React.PureComponent {
+	render() {
+		return (
+  <Router history={history}>
+    {routeChildren}
+  </Router>
+		);
+	}
 }
