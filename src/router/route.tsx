@@ -1,7 +1,7 @@
 import { createBrowserHistory } from 'history';
 import React, { ReactNode } from 'react';
 
-import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, } from 'react-router-dom';
 import routerConfig, { RouterConfigType } from './routerConfig';
 
 const history = createBrowserHistory();
@@ -32,9 +32,9 @@ const routeChildren = renderRouteConf(null, routerConfig, '/');
 export default class Routers extends React.PureComponent {
 	render() {
 		return (
-  <Router history={history}>
+  <BrowserRouter>
     {routeChildren}
-  </Router>
+  </BrowserRouter>
 		);
 	}
 }

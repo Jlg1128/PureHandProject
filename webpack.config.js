@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const webpack = require('webpack')
+// const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const getPublicPath = require('./config/index')
+const getPublicPath = require('./config/index');
 
-const isEnvProduction = process.env.NODE_ENV === 'production' ? true : false
+const isEnvProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
     mode: isEnvProduction ? 'production' : 'development',
@@ -14,9 +14,9 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: getPublicPath()
+        publicPath: getPublicPath(),
     },
-    devtool:'cheap-module-source-map',
+    devtool: 'cheap-module-source-map',
     devServer: {
         // contentBase: path.join(__dirname,'public'),
         // host: 'localhost',
@@ -30,23 +30,27 @@ module.exports = {
                 exclude: '/node_modules/',
                 use: {
                     loader: 'awesome-typescript-loader',
-                }
+                },
             },
             {
                 test: /\.jsx?$/,
                 exclude: '/node_modules/',
                 use: {
-                    loader: 'babel-loader'
-                }
+                    loader: 'babel-loader',
+                },
             },
             {
                 test: /\.html?$/,
                 use: {
-                    loader: 'html-loader'
-                }
+                    loader: 'html-loader',
+                },
             },
             {
-                test: /\.scss/,
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.scss$/,
                 use: [
                     {
                         loader: 'style-loader',
@@ -55,7 +59,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             modules: {
-                                localIdentName: '[path][name]-[local]-[hash:base64:5]'
+                                localIdentName: '[path][name]-[local]-[hash:base64:5]',
                             },
                         },
                     },
@@ -82,41 +86,35 @@ module.exports = {
                             limit: 10000,
                             name: '[name].[ext]',
                             outputPath: './static',
-                            pulicPath: '/static'
-                        }
+                            pulicPath: '/static',
+                        },
                     },
-                ]
+                ],
             },
-            // {
-            //     test: /.(tsx?|jsx?|css|less|scss)$/,
-            //     enforce: 'pre',
-            //     use: ['source-map-loader'],
-            //     exclude: '/node_modules/',
-            // }
-        ]
+        ],
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.css'],
         alias: {
             '@': path.resolve(__dirname, 'src'),
-        }
+        },
     },
     plugins: [
         new HtmlWebPackPlugin({
             title: 'my app',
             filename: 'index.html',
-            template: 'public/index.html'
+            template: 'public/index.html',
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: '[name].css',
-            chunkFilename: '[id].css'
+            chunkFilename: '[id].css',
         }),
         // new webpack.SourceMapDevToolPlugin({
         //     filename: '[name].js',
         //     test: /.(tsx?|jsx?|css|less|scss)$/,
         //     exclude: '/node_modules/',
         // })
-    ]
+    ],
 };

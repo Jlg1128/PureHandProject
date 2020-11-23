@@ -1,12 +1,14 @@
 import React, { Component, Dispatch } from 'react';
-import { test } from '@/utils';
-import styles from './App.scss';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
 import { AnyAction } from 'redux';
-import { Link, BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import Theme from '../Theme/Theme'
-import Child from '../child/child'
+import Map1 from '@/components/echarts/echarts';
+import MyTable from '@/components/echarts/table/table';
+
+// 引入柱状图
+import 'echarts/lib/chart/bar';
+
+// 引入提示框和标题组件
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/title';
 
 export interface User {
   name: string;
@@ -22,21 +24,19 @@ interface State {
   store: any;
 }
 
-class App extends Component<Props, State>{
-  renderUser: <T>(user: T) => T = function <User>(user: User) {
-    return user;
-  }
+class App extends Component<Props, State> {
+  renderUser = (user: User) => user;
+
   handleClick = () => {
     console.log(this.props);
-    
   }
-  componentDidMount() {
-    test();
-    console.log('12312')
-  }
+
   render() {
     return (
-        <Link to='/user'>我是App</Link>
+      <div>
+        <Map1 />
+        <MyTable />
+      </div>
     );
   }
 }
@@ -45,6 +45,6 @@ class App extends Component<Props, State>{
 //   ({ counter }: any) => ({ count: counter.count }),
 //   // (dispatch) => ({ ...bindActionCreators(sendAction,dispatch) })
 
-// )(App)  
+// )(App)
 
-export default App
+export default App;
