@@ -1,14 +1,14 @@
 import React from 'react';
 import SiderBar from './siderBar';
-// import './index.scss';
+import styles from './index.scss';
 
 export const SecureLayout: React.FC = ({ children, ...rest }) => {
     console.log(rest);
-    return <div className="secure-layout-container">
-      <div className="left">
+    return <div className={styles.container}>
+      <div className={styles.left}>
         <SiderBar />
       </div>
-      <div className="right">
+      <div className={styles.right}>
         {children}
       </div>
     </div>;

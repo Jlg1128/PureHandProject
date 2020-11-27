@@ -20,6 +20,11 @@ module.exports = {
     devServer: {
         // contentBase: path.join(__dirname,'public'),
         // host: 'localhost',
+        proxy: { // proxy URLs to backend development server
+            '/api': {
+                target: 'http://localhost:8089',
+            },
+        },
         port: 8000,
         historyApiFallback: true,
     },
@@ -73,17 +78,17 @@ module.exports = {
                 test: /\.(png|jpg|gif)$/,
                 use: [
                     // {
-                    //     loader: 'file-loader',
+                    //     loader: 'url-loader',
                     //     options: {
+                    //         limit: 100000,
                     //         name: '[name].[ext]',
                     //         outputPath: './static',
-                    //         pulicPath: '/static'
+                    //         pulicPath: '/static',
                     //     },
                     // },
                     {
-                        loader: 'url-loader',
+                        loader: 'file-loader',
                         options: {
-                            limit: 10000,
                             name: '[name].[ext]',
                             outputPath: './static',
                             pulicPath: '/static',

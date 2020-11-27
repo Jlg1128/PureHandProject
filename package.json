@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "antd": "^4.8.5",
+    "axios": "^0.21.0",
     "echarts": "^4.9.0",
     "eslint": "^7.13.0",
     "history": "^5.0.0",

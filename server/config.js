@@ -1,8 +1,6 @@
-
-var config = {
+const config = {
     host: 'localhost',
-    port: '8000'
-}
+    port: '8089',
+};
 
-
-module.exports = config
+module.exports = config;
