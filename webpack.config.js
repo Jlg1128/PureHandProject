@@ -22,10 +22,12 @@ module.exports = {
         // host: 'localhost',
         proxy: { // proxy URLs to backend development server
             '/api': {
-                target: 'http://localhost:8089',
+                // target: 'http://localhost:8090',
+                target: 'http://localhost:7001',
             },
         },
-        port: 8000,
+        // host: 'locla',
+        port: 8083,
         historyApiFallback: true,
     },
     module: {

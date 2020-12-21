@@ -4,7 +4,6 @@ import Theme from '@/pages/Theme/Theme';
 import App from '@/pages/Index/App';
 import SecureLayout from '@/layout/secureLayout';
 import ProductInfo from '@/pages/productInfo/productInfo';
-
 // interface RouteType<T> {
 //    [_: string] : T
 // }

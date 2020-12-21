@@ -55,6 +55,7 @@ module.exports = {
     'import/prefer-default-export': 1,
     'no-return-assign': 1,
     'consistent-return': 1,
+    '@typescript-eslint/ban-ts-comment': 0,
     'react/no-array-index-key': 1,
     'no-continue': 'warn',
     'no-restricted-syntax': 'warn',
